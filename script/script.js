@@ -8,7 +8,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     if (user === 'admin' && pass === 'admin123') {
         alert('Log In Successful!');
       
-        window.location.assign('/home.html');
+        window.location.assign('./home.html');
     } else {
         alert('Invalid Password! Try again.');
     }

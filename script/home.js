@@ -78,7 +78,7 @@ const filterIssues = (status, event) => {
         
         const isOpen = lesson.status === 'open';
        
-        const statusImg = isOpen ? '/assets/Open-Status.png' : '/assets/Closed-Status.png';
+        const statusImg = isOpen ? './assets/Open-Status.png' : './assets/Closed-Status.png';
         const borderColor = isOpen ? 'border-t-[#00A96E] border-[5px]' : 'border-t-[#A855F7] border-[5px]';
 
         cardDiv.innerHTML = `
