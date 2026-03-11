@@ -1,5 +1,34 @@
 let allIssues = []; 
 
+const searchInput = document.getElementById('searchInput');
+
+searchInput.addEventListener('input', (e) => {
+    const searchText = e.target.value;
+
+    
+    if (!searchText) {
+        displaynLesson(allIssues);
+        return;
+    }
+
+    
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`)
+        .then(res => res.json())
+        .then(json => {
+            
+            displaynLesson(json.data);
+        })
+        
+});
+
+
+
+
+
+
+
+
+
 const issueName = () => {
     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
         .then(res => res.json())
@@ -36,6 +65,12 @@ const filterIssues = (status, event) => {
 
 const displayLesson = (lessons) => {
     const issueContainer = document.getElementById('issueGrid');
+    const countElement = document.getElementById('count'); 
+    
+   
+    if (countElement) {
+        countElement.innerText = lessons.length; 
+    }
     issueContainer.innerHTML = "";
 
     for (let lesson of lessons) {
