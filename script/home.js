@@ -63,7 +63,7 @@ const filterIssues = (status, event) => {
 
 
 
-const displayLesson = (lessons) => {
+    const displayLesson = (lessons) => {
     const issueContainer = document.getElementById('issueGrid');
     const countElement = document.getElementById('count'); 
     
@@ -127,17 +127,21 @@ const displayLesson = (lessons) => {
             </span>
         `;
     }).join('')}
-</div>
+    </div>
                 <div class="px-5 py-4 border-t border-gray-100 flex flex-col gap-1 font-normal text-[12px] text-[#64748B]">
                     <span>#${lesson.id} by ${lesson.author}</span>
                     <span>${new Date(lesson.createdAt).toLocaleDateString()}</span>
                 </div>
             </div>
+
+            
         `;
+        cardDiv.onclick = () => openModal(lesson.id);
+            cardDiv.classList.add('cursor-pointer');
         issueContainer.append(cardDiv);
     }
 }
-document.getElementById('searchInput')?.addEventListener('input', (e) => {
+    document.getElementById('searchInput')?.addEventListener('input', (e) => {
     const searchText = e.target.value.toLowerCase();
     const searchedIssues = allIssues.filter(issue => 
         issue.title.toLowerCase().includes(searchText) || 
@@ -147,3 +151,67 @@ document.getElementById('searchInput')?.addEventListener('input', (e) => {
 });
 
 issueName();
+
+
+
+
+
+          const openModal = (id) => {
+              const modal = document.getElementById('modal');
+              const modalBody = document.getElementById('modalBody');
+
+    
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+        .then(res => res.json())
+        .then(json => {
+            const data = json.data;
+
+            
+            const statusBg = data.status === 'open' ? 'bg-[#00A96E]' : 'bg-[#A855F7]';
+
+            modalBody.innerHTML = `
+                <div class="space-y-4 text-left">
+                    <h2 class="text-2xl font-bold text-[#1F2937]">${data.title}</h2>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2.5 py-1.5 rounded-full text-[12px] font-normal text-white ${statusBg}">
+                            ${data.status.toUpperCase()}
+                        </span>
+                        <span class="text-[#64748B] text-[12px]">Opened by ${data.author} • ${new Date(data.createdAt).toLocaleDateString()}</span>
+                    </div>
+                    
+                    <p class="text-[#64748B] text-[12px] ">${data.description}</p>
+                    
+                    <div class="bg-gray-50 p-4 rounded-xl flex justify-between items-center border border-gray-100">
+                        <div>
+                            <p class="text-[16px] text-[#64748B] font-normal">Assignee</p>
+                            <p class="font-semibold text-[#1F2937] text-sm">${data.author}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[16px] text-[#64748B] font-normal">Priority</p>
+                            <span class="px-3 py-1 rounded-lg bg-[#EF4444] text-[#FFFFFF] font-medium text-[12px] uppercase">
+                                ${data.priority}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end pt-4">
+                        <button onclick="closeModal()" class="bg-[#4F00FF] text-[#FFFFFF] px-10 py-2.5 rounded-lg font-semibold text-[16px] hover:bg-[#4000D9] ">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+                     modal.classList.remove('hidden'); 
+                     document.body.style.overflow = 'hidden'; 
+            
+        })
+};
+
+
+    const closeModal = () => {
+
+
+         document.getElementById('modal').classList.add('hidden');
+         document.body.style.overflow = 'auto'; 
+};
