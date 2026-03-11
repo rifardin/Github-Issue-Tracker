@@ -36,22 +36,22 @@
       <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm mb-6 w-full">
     
     <div class="flex gap-2">
-        <button id="" class="px-12 py-2.5 rounded-lg text-sm font-bold bg-[#4F00FF] text-white transition">
+        <button onclick="filterIssues('all', event)" class="tab-btn px-12 py-2.5 rounded-lg text-sm font-bold bg-[#4F00FF] text-white transition">
             All
         </button>
         
-        <button class="px-12 py-2.5 rounded-lg text-sm font-bold text-gray-500 border border-gray-100 hover:bg-gray-50 transition">
+        <button onclick="filterIssues('open', event)" class="tab-btn px-12 py-2.5 rounded-lg text-sm font-bold text-gray-500 border border-gray-100 hover:bg-gray-50 transition">
             Open
         </button>
         
-        <button class="px-12 py-2.5 rounded-lg text-sm font-bold text-gray-500 border border-gray-100 hover:bg-gray-50 transition">
+        <button onclick="filterIssues('closed', event)" class="tab-btn px-12 py-2.5 rounded-lg text-sm font-bold text-gray-500 border border-gray-100 hover:bg-gray-50 transition">
             Closed
         </button>
     </div>
 
 </div>
 
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div id="" class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="p-6 border-b border-gray-100 flex justify-between items-center">
                 <div class="flex items-center gap-4">
                     <div class="bg-blue-50 p-3 rounded-full text-blue-600">
