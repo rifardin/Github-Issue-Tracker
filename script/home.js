@@ -104,20 +104,20 @@ const filterIssues = (status, event) => {
     ${lesson.labels.map(label => {
         
         let badgeStyle = "bg-[#FEECEC] text-[#EF4444] border-red-100";
-        let badgeIcon = "/assets/BugDroid.png";
+        let badgeIcon = "./assets/BugDroid.png";
 
         if (label.toLowerCase() === 'enhancement') {
             badgeStyle = "bg-[#BBF7D0] text-[#00A96E] border-emerald-100";
-            badgeIcon = "/assets/Sparkle.png";
+            badgeIcon = "./assets/Sparkle.png";
         } else if (label.toLowerCase() === 'help wanted') {
             badgeStyle = "bg-[#FDE68A] text-[#D97706] border-orange-100";
-            badgeIcon = "/assets/help.png";
+            badgeIcon = "./assets/help.png";
         } else if (label.toLowerCase() === 'documentation') {
             badgeStyle = "bg-gray-100 text-gray-600 border-gray-200";
-            badgeIcon = "/assets/help.png"; 
+            badgeIcon = "./assets/help.png"; 
         } else if (label.toLowerCase() === 'good first issue') {
             badgeStyle = "bg-[#FEECEC] text-[#EF4444] border-red-100";
-            badgeIcon = "/assets/BugDroid.png";
+            badgeIcon = "./assets/BugDroid.png";
         }
 
         return `
